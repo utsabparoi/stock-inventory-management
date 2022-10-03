@@ -31,4 +31,7 @@ Route::middleware([
 Route::middleware(['auth:sanctum'])->group(function(){
     //Category
     Route::resource('categories', CategoriesController::class);
+
+    //Brand
+    Route::resource('brands', BrandsController::class);
 });
