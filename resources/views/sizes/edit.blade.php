@@ -25,18 +25,18 @@
         <div class="col-lg-6">
           <div class="card card-primary card-outline">
             <div class="card-body">
-              <h5 class="card-title">Edit Brand</h5><br>
+              <h5 class="card-title">Edit Size</h5><br>
 
               <!-- form start -->
-              <form role="form" action="{{ route('brands.update', $brands->id) }}" method="post">
+              <form role="form" action="{{ route('sizes.update', $size->id) }}" method="post">
                 @csrf
                 @method('PUT')
                 <div class="card-body">
                   <div class="form-group">
-                    <label for="exampleInputEmail1">Name</label>
-                    <input name="name" type="text" class="form-control" placeholder="Enter brands name" value="{{$brands->name}}">
-                    @if($errors->has('name'))
-                      <span class="text-danger">{{ $errors->first('name') }}</span>
+                    <label for="exampleInputEmail1">Size</label>
+                    <input name="size" type="text" class="form-control" placeholder="Enter size" value="{{$size->size}}">
+                    @if($errors->has('size'))
+                      <span class="text-danger">{{ $errors->first('size') }}</span>
                     @endif
                   </div>
                 </div>
