@@ -5,12 +5,12 @@
     <div class="container-fluid">
       <div class="row mb-2">
         <div class="col-sm-6">
-          <h1 class="m-0">Categories</h1>
+          <h1 class="m-0">Products</h1>
         </div><!-- /.col -->
         <div class="col-sm-6">
           <ol class="breadcrumb float-sm-right">
             <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Home</a></li>
-            <li class="breadcrumb-item active">Category list</li>
+            <li class="breadcrumb-item active">Product list</li>
           </ol>
         </div><!-- /.col -->
       </div><!-- /.row -->
@@ -25,12 +25,12 @@
         <div class="col-lg-12">
           <div class="card card-primary card-outline">
             <div class="card-body">
-              <h4 class="card-title">Category list</h4><br><br>
+              <h4 class="card-title">Product list</h4><br><br>
 
-              <a href="{{route('categories.create')}}" class="btn btn-sm btn-primary">
-                <i class="fa fa-plus"></i> Add Category<br>
+              <a href="{{route('products.create')}}" class="btn btn-sm btn-primary">
+                <i class="fa fa-plus"></i> Add Product<br>
               </a>
-              <!-- <example-component></example-component> -->
+              <example-component></example-component>
               <table class="table table-bordered datatable">
                 <thead>
                     <tr>
@@ -40,21 +40,21 @@
                     </tr>
                 </thead>
                 <tbody>
-                @if($categories)
-                    @foreach($categories as $key => $category)
+                @if($products)
+                    @foreach($products as $key => $product)
                         <tr>
                             <td>{{ ++$key }}</th>
-                            <td>{{ $category->name ?? ''}}</th>
+                            <td>{{ $product->name ?? ''}}</th>
                             <td>
-                                <a href="{{ route('categories.edit', $category->id)}}" class="btn btn-sm btn-info">
+                                <a href="{{ route('products.edit', $product->id)}}" class="btn btn-sm btn-info">
                                     <i class="fa fa-edit"></i> Edit
                                 </a>
 
-                                <a href="javascript:;" class="btn btn-sm btn-danger sa-delete" data-form-id="category-delete-{{$category->id}}">
+                                <a href="javascript:;" class="btn btn-sm btn-danger sa-delete" data-form-id="product-delete-{{$product->id}}">
                                     <i class="fa fa-trash"></i> Delete
                                 </a>
 
-                                <form id="category-delete-{{$category->id}}" action="{{ route('categories.destroy', $category->id)}}" method="post">
+                                <form id="product-delete-{{$product->id}}" action="{{ route('products.destroy', $product->id)}}" method="post">
                                     @csrf
                                     @method('DELETE')
                                 </form>

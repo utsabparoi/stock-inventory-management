@@ -35,4 +35,6 @@ Route::middleware(['auth:sanctum'])->group(function(){
     Route::resource('brands', BrandsController::class);
     //Size
     Route::resource('sizes', SizesController::class);
+    //Product
+    Route::resource('products', ProductsController::class);
 });

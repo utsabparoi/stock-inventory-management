@@ -23,6 +23,7 @@
         "vue-template-compiler": "^2.1.8"
     },
     "dependencies": {
-        "vue": "^2.7.10"
+        "vue": "^2.7.10",
+        "vuex": "^3.4.0"
     }
 }
