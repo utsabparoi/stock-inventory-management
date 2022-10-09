@@ -30,7 +30,7 @@
               <a href="{{route('products.create')}}" class="btn btn-sm btn-primary">
                 <i class="fa fa-plus"></i> Add Product<br>
               </a>
-              <example-component></example-component>
+              <!-- <example-component></example-component> -->
               <table class="table table-bordered datatable">
                 <thead>
                     <tr>

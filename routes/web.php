@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-// use \App\Htpp\Controllers\CategoriesController;
+// use App\Htpp\Controllers\CategoriesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,6 +31,7 @@ Route::middleware([
 Route::middleware(['auth:sanctum'])->group(function(){
     //Category
     Route::resource('categories', CategoriesController::class);
+    Route::get('/api/categories', 'CategoriesController@getCategoriesJson');
     //Brand
     Route::resource('brands', BrandsController::class);
     //Size
