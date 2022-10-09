@@ -5,17 +5,21 @@
 
             <!-- form start -->
             <form role="form" action="" method="post">
-            <div class="card-body">
-                <div class="form-group">
-                    <label>Category</label>
-                    <Select2 v-model="form.category_id" :options="categories" :settings="{ placeholder: 'Select category' }"></Select2>
+                <div class="card-body">
+                    <div class="form-group">
+                        <label>Category</label>
+                        <Select2 v-model="form.category_id" :options="categories" :settings="{ placeholder: 'Select category' }"></Select2>
+                    </div>
+                
+                    <div class="form-group">
+                        <label>Brand</label>
+                        <Select2 v-model="form.brand_id" :options="brands" :settings="{ placeholder: 'Select brand' }"></Select2>
+                    </div>
                 </div>
-            </div>
-            <!-- /.card-body -->
 
-            <div class="card-footer">
-                <button type="submit" class="btn btn-primary btn-sm"><i class="fa fa-save"></i> Submit</button>
-            </div>
+                <div class="card-footer">
+                    <button type="submit" class="btn btn-primary btn-sm"><i class="fa fa-save"></i> Submit</button>
+                </div>
             </form>
         </div>
     </div><!-- /.card -->
@@ -33,18 +37,22 @@
         data(){
             return {
                 form: {
-                    category_id: 0
+                    category_id: 0,
+                    brand_id: 0
                 }
             }
         },
         computed: {
             ...mapGetters({
-                'categories' : 'getCategories'
+                'categories' : 'getCategories',
+                'brands' : 'getBrands'
             })
         },
         mounted(){
             //Get Categories
             store.dispatch(actions.GET_CATEGORIES);
+            //Get Brands
+            store.dispatch(actions.GET_BRANDS);
         }
     }
 </script>
