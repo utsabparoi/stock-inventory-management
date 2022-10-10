@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Size;
+use Illuminate\Http\Response;
 
 class SizesController extends Controller
 {
@@ -108,5 +109,15 @@ class SizesController extends Controller
 
         flash('Size Deleted Successfully')->success();
         return redirect()->route('sizes.index');
+    }
+
+    //Handle AJAX request
+    public function getSizesJson(){
+        $sizes = Size::all();
+
+        return response()->json([
+            'success' => true,
+            'data' => $sizes
+        ], Response::HTTP_OK);
     }
 }
