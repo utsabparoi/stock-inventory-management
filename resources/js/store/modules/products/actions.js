@@ -6,7 +6,9 @@ export default {
     [actions.ADD_PRODUCT]({commit}, payload){
         Axios.post('/products', payload)
             .then(res=>{
-                
+                if (res.data.success == true) {
+                    window.location.href = '/products'
+                }
             })
             .catch(err=>{
                 // console.log(err.response.data);

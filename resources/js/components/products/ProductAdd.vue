@@ -109,8 +109,8 @@
         data(){
             return {
                 form: {
-                    category_id: 0,
-                    brand_id: 0,
+                    category_id: '',
+                    brand_id: '',
                     sku: '',
                     name: '',
                     image: '',
@@ -172,7 +172,7 @@
                 data.append('year', this.form.year)
                 data.append('description', this.form.description)
                 data.append('status', this.form.status)
-                data.append('items', this.form.items)
+                data.append('items', JSON.stringify(this.form.items))
                 
                 //console.log(this.form)
                 store.dispatch(actions.ADD_PRODUCT, data);

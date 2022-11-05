@@ -5061,8 +5061,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   data: function data() {
     return {
       form: {
-        category_id: 0,
-        brand_id: 0,
+        category_id: '',
+        brand_id: '',
         sku: '',
         name: '',
         image: '',
@@ -5119,7 +5119,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       data.append('year', this.form.year);
       data.append('description', this.form.description);
       data.append('status', this.form.status);
-      data.append('items', this.form.items);
+      data.append('items', JSON.stringify(this.form.items));
 
       //console.log(this.form)
       _store__WEBPACK_IMPORTED_MODULE_0__["default"].dispatch(_store_action_types__WEBPACK_IMPORTED_MODULE_1__.ADD_PRODUCT, data);
@@ -6017,7 +6017,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_defineProperty({}, _action_types__WEBPACK_IMPORTED_MODULE_0__.ADD_PRODUCT, function (_ref, payload) {
   var commit = _ref.commit;
-  axios__WEBPACK_IMPORTED_MODULE_2___default().post('/products', payload).then(function (res) {})["catch"](function (err) {
+  axios__WEBPACK_IMPORTED_MODULE_2___default().post('/products', payload).then(function (res) {
+    if (res.data.success == true) {
+      window.location.href = '/products';
+    }
+  })["catch"](function (err) {
     // console.log(err.response.data);
     commit(_mutation_types__WEBPACK_IMPORTED_MODULE_1__.SET_ERRORS, err.response.data.errors);
   });
