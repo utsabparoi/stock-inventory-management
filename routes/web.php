@@ -15,20 +15,24 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    // return view('welcome');
+    return redirect('/login');
 });
 
-Route::middleware([
-    'auth:sanctum',
-    config('jetstream.auth_session'),
-    'verified'
-])->group(function () {
-    Route::get('/dashboard', function () {
-        return view('dashboard');
-    })->name('dashboard');
-});
+// Route::middleware(['auth:sanctum',config('jetstream.auth_session'),'verified'])->group(function () {
+//     Route::get('/dashboard', function () {
+//         return view('dashboard');
+//     })->name('dashboard');
+// });
+//User
+Route::get('/logout', 'UsersController@logout')->name('users.logout');
 
 Route::middleware(['auth:sanctum'])->group(function(){
+    //Dashboard
+    Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
+    //User
+    Route::resource('users', UsersController::class);
+    
     //Category
     Route::resource('categories', CategoriesController::class);
     Route::get('/api/categories', 'CategoriesController@getCategoriesJson');
@@ -40,4 +44,14 @@ Route::middleware(['auth:sanctum'])->group(function(){
     Route::get('/api/sizes', 'SizesController@getSizesJson');
     //Product
     Route::resource('products', ProductsController::class);
+    Route::get('/api/products', 'ProductsController@getProductsJson');
+    //Stock
+    Route::get('/stocks', 'StocksController@stock')->name('stock');
+    Route::post('/stocks', 'StocksController@stockSubmit')->name('stockSubmit');
+    Route::get('/stocks/history', 'StocksController@history')->name('stockHistory');
+
+    //Return product
+    Route::get('/return-products', 'ReturnProductsController@returnProduct')->name('returnProduct');
+    Route::post('/return-products', 'ReturnProductsController@returnProductSubmit')->name('returnProductSubmit');
+    Route::get('/return-products/history', 'ReturnProductsController@history')->name('returnProductHistory');
 });

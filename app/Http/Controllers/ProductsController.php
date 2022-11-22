@@ -19,7 +19,7 @@ class ProductsController extends Controller
      */
     public function index()
     {
-        $products = Product::all();
+        $products = Product::with(['category','brand'])->get();
         return view('products.index', compact('products'));
     }
 
@@ -98,7 +98,7 @@ class ProductsController extends Controller
             }
             
         }
-        // Error response
+        flash('Product Created Successfully')->success();
         return response()->json([
             'success' =>true,
         ], Response::HTTP_OK);
@@ -113,7 +113,12 @@ class ProductsController extends Controller
      */
     public function show($id)
     {
-        //
+        $product = Product::with(['category','brand','product_stocks.size'])
+        ->where('id', $id)
+        ->first();
+
+        return view('products.show', compact('product'));
+
     }
 
     /**
@@ -124,7 +129,9 @@ class ProductsController extends Controller
      */
     public function edit($id)
     {
-        //
+        $product = Product::where('id', $id)->with(['product_stocks'])->first();
+
+        return view('products.edit', compact('product'));
     }
 
     /**
@@ -136,7 +143,71 @@ class ProductsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        //Validate data
+        $validate = Validator::make($request->all(), [
+            'category_id' => 'required|numeric',
+            'brand_id' => 'required|numeric',
+            'sku' => 'required|string|max:100|unique:products,sku,'.$id,
+            'name' => 'required|string|max:200',
+            'image' => 'nullable|image|mimes:jpeg,jpg,png|max:1024',
+            'cost_price' => 'required|numeric',
+            'retail_price' => 'required|numeric',
+            'year' => 'required',
+            'description' => 'required|max:200',
+            'status' => 'required|numeric'
+        ]);
+        // Error response
+        if ($validate->fails()){
+            return response()->json([
+                'success' =>false,
+                'errors' => $validate->errors()
+            ], Response::HTTP_UNPROCESSABLE_ENTITY);
+        }
+
+        //Update Product
+        $product = Product::findOrFail($id);
+
+        $product->user_id = Auth::id();
+        $product->category_id = $request->category_id;
+        $product->brand_id = $request->brand_id;
+        $product->sku = $request->sku;
+        $product->name = $request->name;
+        $product->cost_price = $request->cost_price;
+        $product->retail_price = $request->retail_price;
+        $product->year = $request->year;
+        $product->description = $request->description;
+        $product->status = $request->status;
+
+        //Upload Image
+        if($request->hasFile('image')){
+            $image = $request->image;
+            $name = Str::random(60) . '.' . $image->getClientOriginalExtension();
+            $image->storeAs('public/product_images', $name);
+
+            $product->image = $name;
+        }
+        $product->save();
+
+        //Delete old stock
+        ProductSizeStock::where('product_id', $id)->delete();
+        //Store product size stock
+        if ($request->items) {
+            foreach (json_decode($request->items) as $item) {
+                $size_stock = new ProductSizeStock();
+
+                $size_stock->product_id = $product->id;
+                $size_stock->size_id = $item->size_id;
+                $size_stock->location = $item->location;
+                $size_stock->quantity = $item->quantity;
+                $size_stock->save();
+            }
+            
+        }
+
+        flash('Product Updated Successfully')->success();
+        return response()->json([
+            'success' =>true,
+        ], Response::HTTP_OK);
     }
 
     /**
@@ -147,6 +218,19 @@ class ProductsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $product = Product::findOrFail($id);
+        $product->delete();
+        flash('Product Deleted Successfully')->success();
+        return back();
+    }
+
+    //Handle AJAX request
+    public function getProductsJson(){
+        $products = Product::with(['product_stocks.size'])->get();
+
+        return response()->json([
+            'success' => true,
+            'data' => $products
+        ], Response::HTTP_OK);
     }
 }

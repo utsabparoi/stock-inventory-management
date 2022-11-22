@@ -25,27 +25,39 @@
         <div class="col-lg-12">
           <div class="card card-primary card-outline">
             <div class="card-body">
-              <h4 class="card-title">Product list</h4><br><br>
 
               <a href="{{route('products.create')}}" class="btn btn-sm btn-primary">
-                <i class="fa fa-plus"></i> Add Product<br>
-              </a>
-              
+                <i class="fa fa-plus"></i> Add Product
+              </a><br><br>
+              <h4 class="card-title">Product list</h4>
               <table class="table table-bordered datatable">
                 <thead>
                     <tr>
                         <th>#SL</th>
+                        <th class="text-center">Image</th>
                         <th>Name</th>
-                        <th>Action</th>
+                        <th>SKU</th>
+                        <th>Category</th>
+                        <th>Brand</th>
+                        <th class="text-center">Action</th>
                     </tr>
                 </thead>
                 <tbody>
                 @if($products)
                     @foreach($products as $key => $product)
                         <tr>
-                            <td>{{ ++$key }}</th>
-                            <td>{{ $product->name ?? ''}}</th>
-                            <td>
+                            <td>{{ ++$key }}</td>
+                            <td class="text-center">
+                              <img width="60px" height="64px" src="{{asset('storage/product_images/'. $product->image)}}">
+                            </td>
+                            <td>{{ $product->name ?? ''}}</td>
+                            <td>{{ $product->sku ?? ''}}</td>
+                            <td>{{ $product->category->name ?? ''}}</td>
+                            <td>{{ $product->brand->name ?? ''}}</td>
+                            <td class="text-center">
+                                <a href="{{ route('products.show', $product->id)}}" class="btn btn-sm btn-primary">
+                                    <i class="fa fa-desktop"></i> Show
+                                </a>
                                 <a href="{{ route('products.edit', $product->id)}}" class="btn btn-sm btn-info">
                                     <i class="fa fa-edit"></i> Edit
                                 </a>

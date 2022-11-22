@@ -6,3 +6,5 @@ export const SET_CATEGORIES = 'SET_CATEGORIES';
 export const SET_BRANDS = 'SET_BRANDS';
 //Sizes
 export const SET_SIZES = 'SET_SIZES';
+//Prodcuts
+export const SET_PRODUCTS = 'SET_PRODUCTS';

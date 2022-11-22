@@ -25,18 +25,17 @@
         <div class="col-lg-12">
           <div class="card card-primary card-outline">
             <div class="card-body">
-              <h4 class="card-title">Brand list</h4><br><br>
 
               <a href="{{route('brands.create')}}" class="btn btn-sm btn-primary">
-                <i class="fa fa-plus"></i> Add Brand<br>
-              </a>
-
+                <i class="fa fa-plus"></i> Add Brand
+              </a><br><br>
+              <h4 class="card-title">Brand list</h4>
               <table class="table table-bordered datatable">
                 <thead>
                     <tr>
                         <th>#SL</th>
                         <th>Name</th>
-                        <th>Action</th>
+                        <th class="text-center">Action</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -45,7 +44,7 @@
                         <tr>
                             <td>{{ ++$key }}</th>
                             <td>{{ $brand->name ?? ''}}</th>
-                            <td>
+                            <td class="text-center">
                                 <a href="{{ route('brands.edit', $brand->id)}}" class="btn btn-sm btn-info">
                                     <i class="fa fa-edit"></i> Edit
                                 </a>
