@@ -25,8 +25,8 @@
                 <div class="col-lg-12">
                     <div class="card card-primary card-outline">
                         <div class="card-body">
-                            <h5 class="card-title">Add Product</h5><br>
-
+                            <h5 class="card-title">Inventory Item</h5><br>
+                            
                             <!-- form start -->
                             <form role="form" action="{{ route('stocks.store') }}" method="post"
                                 enctype="multipart/form-data">
@@ -134,7 +134,7 @@
     </div>
     <!-- /.content -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
-    <link rel="stylesheet" href="{{ asset('backend/css/custom-style.css') }}" />
+    <link rel="stylesheet" href="{{ asset('admin/css/custom-style.css') }}" />
 
     <script>
         $(document).ready(function() {

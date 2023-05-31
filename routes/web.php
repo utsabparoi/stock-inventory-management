@@ -43,6 +43,7 @@ Route::middleware(['auth:sanctum'])->group(function(){
     //User Contact info List
     Route::get('contact-list', 'ContactListController@index')->name('contact_list');
     Route::delete('contact/{id}', 'ContactListController@destroy')->name('delete_contact');
+    Route::post('language/switch', 'LanguageController@switch')->name('language.switch');
 });
 
 //User Contact to Admin
@@ -50,16 +51,6 @@ Route::resource('user_contact', ContactUsController::class);
 Route::get('about-us', 'HomeController@aboutUs')->name('aboutUs');
 Route::get('category/{id}', 'HomeController@singleCategory')->name('single-category');
 
-//Cart Routes
-Route::post('/update-cart', 'CartController@updateCartAjax')->name('update-cart');
-Route::post('/remove-from-cart', 'CartController@removeFromCartAjax')->name('remove-from-cart');
-Route::get('/proceed-to-checkout', 'CartController@checkoutPage')->name('proceed-to-checkout')->middleware('auth');
-Route::post('/submit-order', 'CartController@submitOrder')->name('submit-order');
 
-Route::get('/thankyou', 'CartController@thankyou')->name('thankyou');
 
-Route::resource('register-users', RegisterUserController::class);
-Route::get('/registerForm', 'RegisterUserController@registerUser')->name('registerForm');
-Route::get('/loginForm', 'RegisterUserController@loginUser')->name('loginForm')->middleware('auth');;
-Route::get('/userLogout', 'RegisterUserController@userLogout')->name('userLogout');
 

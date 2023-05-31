@@ -54,12 +54,12 @@
                             <td>{{ $stock->current_quantity ?? ''}}</td>
 
                             <td class="text-center">
-                                <a href="{{ route('stocks.show', $stock->id)}}" class="btn btn-sm btn-primary">
+                                {{-- <a href="{{ route('stocks.show', $stock->id)}}" class="btn btn-sm btn-primary">
                                     <i class="fa fa-eye"></i> Show
-                                </a>
-                                <a href="{{ route('stocks.edit', $stock->id)}}" class="btn btn-sm btn-info">
+                                </a> --}}
+                                {{-- <a href="{{ route('stocks.edit', $stock->id)}}" class="btn btn-sm btn-info">
                                     <i class="fa fa-edit"></i> Edit
-                                </a>
+                                </a> --}}
 
                                 <a href="javascript:;" class="btn btn-sm btn-danger sa-delete" data-form-id="stock-delete-{{$stock->id}}">
                                     <i class="fa fa-trash"></i> Delete
