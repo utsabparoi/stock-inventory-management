@@ -53,7 +53,7 @@
                                 <a href="{{ route('users.edit', $user->id)}}" class="btn btn-sm btn-info">
                                     <i class="fa fa-edit"></i> Edit
                                 </a>
-                                @if(auth()->id() != $user->id)
+                                @if(($user->user_type != 1))
 
                                     <a href="javascript:;" class="btn btn-sm btn-danger sa-delete" data-form-id="user-delete-{{$user->id}}">
                                         <i class="fa fa-trash"></i> Delete

@@ -52,53 +52,29 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="{{ route('sizes.index') }}" class="nav-link {{ request()->is('sizes*') ? 'active' : '' }}">
-                  <i class="fa fa-list nav-icon"></i>
-                  <p>Size</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="{{ route('brands.index') }}" class="nav-link {{ request()->is('brands*') ? 'active' : '' }}">
-                  <i class="fa fa-list nav-icon"></i>
-                  <p>Brand</p>
-                </a>
-              </li>
-              <li class="nav-item">
                 <a href="{{ route('products.index') }}" class="nav-link {{ request()->is('products*') ? 'active' : '' }}">
                   <i class="fa fa-list nav-icon"></i>
                   <p>Product</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="{{ route('stock') }}" class="nav-link {{ request()->is('stocks') ? 'active' : '' }}">
-                  <i class="fa fa-cart-plus nav-icon"></i>
+                <a href="{{ route('stocks.index') }}" class="nav-link {{ request()->is('stocks*') ? 'active' : '' }}">
+                  <i class="fa fa-list nav-icon"></i>
                   <p>Stock</p>
                 </a>
               </li>
-              <li class="nav-item">
-                <a href="{{ route('stockHistory') }}" class="nav-link {{ request()->is('stocks/history') ? 'active' : '' }}">
-                  <i class="far fa-file nav-icon"></i>
-                  <p>Stock History</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="{{ route('returnProduct') }}" class="nav-link {{ request()->is('return-products') ? 'active' : '' }}">
+              {{-- <li class="nav-item">
+                <a href="{{ route('about_us.index') }}" class="nav-link {{ request()->is('about_us*') ? 'active' : '' }}">
                   <i class="fa fa-list nav-icon"></i>
-                  <p>Return Product</p>
+                  <p>About Us</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="{{ route('returnProductHistory') }}" class="nav-link {{ request()->is('return-products/history') ? 'active' : '' }}">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Return Product History</p>
+                <a href="{{ route('contact_list') }}" class="nav-link {{ request()->is('contact_us*') ? 'active' : '' }}">
+                  <i class="fa fa-list nav-icon"></i>
+                  <p>Contact Us</p>
                 </a>
-              </li>
-              <li class="nav-item">
-                <a href="#" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Inactive Page</p>
-                </a>
-              </li>
+              </li> --}}
             </ul>
           </li>
           <li class="nav-item">
@@ -110,7 +86,7 @@
                       <i class="nav-icon fa fa-sign-out-alt"></i> {{ __('Log Out') }}
                   </a>
               </form>
-            
+
           </li>
         </ul>
       </nav>

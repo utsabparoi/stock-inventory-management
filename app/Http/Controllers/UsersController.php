@@ -43,12 +43,12 @@ class UsersController extends Controller
             'email' => 'required|email|unique:users',
             'password' => 'required|min:8|max:50|confirmed'
         ]);
-        
+
         $user = new User();
         $user->name = $request->name;
         $user->email = $request->email;
-        $user->password = Hash::make($request->password); //hash for encryption the password 
-
+        $user->password = Hash::make($request->password); //hash for encryption the password
+        $user->user_type = $request->user_type;
         $user->save();
 
         flash('User created successfully')->success();
@@ -92,14 +92,15 @@ class UsersController extends Controller
             'email' => 'required|email|unique:users,email,'.$id,
             'password' => 'nullable|min:8|max:50|confirmed'
         ]);
-        
+
         $user = User::findOrFail($id);
         $user->name = $request->name;
         $user->email = $request->email;
         if ($request->has('password') && $request->password != null) {
-            $user->password = Hash::make($request->password); //hash for encryption the password     
+            $user->password = Hash::make($request->password); //hash for encryption the password
         }
-        
+        $user->user_type = $request->user_type;
+
         $user->save();
 
         flash('User updated successfully')->success();
@@ -123,6 +124,6 @@ class UsersController extends Controller
 
     public function logout(){
         Auth::logout();
-        return redirect('/login');
+        return redirect()->route('login');
     }
 }

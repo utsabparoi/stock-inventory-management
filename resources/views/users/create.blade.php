@@ -56,6 +56,14 @@
                   </div>
 
                   <div class="form-group">
+                    <label for="exampleInputEmail1">User Type <span class="text-danger">*</span></label>
+                    <input name="user_type" type="number" class="form-control" placeholder="Enter user-type">
+                    @if($errors->has('user_type'))
+                      <span class="text-danger">{{ $errors->first('user_type') }}</span>
+                    @endif
+                  </div>
+
+                  <div class="form-group">
                     <label for="exampleInputEmail1">Confirm Password <span class="text-danger">*</span></label>
                     <input name="password_confirmation" type="password" class="form-control" placeholder="Confirm password">
                   </div>

@@ -75,6 +75,12 @@
                                 <option v-for="(size, index)  in sizes" :key="index" :value="size.id" >{{ size.size }}</option>
                             </select>
                         </div>
+                        <div class="col-sm-4">
+                            <select class="form-control" v-model="item.size_id">
+                                <option value="">Select a Category</option>
+                                <option v-for="(category, index)  in categories" :key="index" :value="category.id" >{{ cateogry.name }}</option>
+                            </select>
+                        </div>
                         <div class="col-sm-3">
                             <input type="text" v-model="item.location" class="form-control" placeholder="Location">
                         </div>
@@ -122,6 +128,7 @@
                     items: [
                         {
                             size_id: '',
+                            category_id: '',
                             location: '',
                             quantity: 0
                         }
@@ -151,6 +158,7 @@
             addItem(){
                 let item = {
                     size_id: '',
+                    category_id: '',
                     location: '',
                     quantity: 0       
                 }

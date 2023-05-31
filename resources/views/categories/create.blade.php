@@ -28,7 +28,7 @@
               <h5 class="card-title">Create Category</h5><br>
 
               <!-- form start -->
-              <form role="form" action="{{ route('categories.store') }}" method="post">
+              <form role="form" action="{{ route('categories.store') }}" method="post" enctype="multipart/form-data">
                 @csrf
                 <div class="card-body">
                   <div class="form-group">
@@ -37,6 +37,7 @@
                     @if($errors->has('name'))
                       <span class="text-danger">{{ $errors->first('name') }}</span>
                     @endif
+
                   </div>
                 </div>
                 <!-- /.card-body -->

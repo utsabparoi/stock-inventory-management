@@ -4,10 +4,12 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Category;
+use App\Traits\FileSaver;
 use Illuminate\Http\Response;
 
 class CategoriesController extends Controller
 {
+    use FileSaver;
     /**
      * Display a listing of the resource.
      *
@@ -39,15 +41,18 @@ class CategoriesController extends Controller
     {
         //form validation
         $this->validate($request, [
-            'name'  =>  'required|min:2|max:50|unique:categories'
+            'name'  =>  'required|min:2|max:50|unique:categories',
         ]);
 
-        $category = new Category();
-        $category->name = $request->name;
-        $category->save();
+        try {
+            $this->storeOrUpdate($request);
+            flash('Category Created Successfully')->success();
+            return redirect()->route('categories.index')->with('success','Added Success');
 
-        flash('Category Created Successfully')->success();
-        return back();
+        } catch (\Throwable $th) {
+            return redirect()->back()->with('error',$th->getMessage());
+
+        }
     }
 
     /**
@@ -84,16 +89,16 @@ class CategoriesController extends Controller
     {
         //form validation
         $this->validate($request, [
-            'name'  =>  'required|min:2|max:50|unique:categories,name,' . $id
+            'name'  =>  'required|min:2|max:50|unique:categories,name,' . $id,
         ]);
 
-        $category = Category::findOrFail($id);
-
-        $category->name = $request->name;
-        $category->save();
-
-        flash('Category Updated Successfully')->success();
-        return redirect()->route('categories.index');
+        try {
+            $this->storeOrUpdate($request,$id);
+            flash('Category Updated Successfully')->success();
+            return redirect()->route('categories.index');
+        } catch (\Throwable $th) {
+            return redirect()->back()->with('error',$th->getMessage());
+        }
     }
 
     /**
@@ -119,5 +124,20 @@ class CategoriesController extends Controller
             'success' => true,
             'data' => $categories
         ], Response::HTTP_OK);
+    }
+
+    private function storeOrUpdate($request, $id = null)
+    {
+        // ddd($request);
+        try {
+            Category::updateOrCreate([
+                'id'             => $id,
+            ],[
+                'name'          => $request->name,
+            ]);
+
+        } catch (\Throwable $th) {
+            throw $th;
+        }
     }
 }

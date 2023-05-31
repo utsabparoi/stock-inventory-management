@@ -5073,6 +5073,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         status: 1,
         items: [{
           size_id: '',
+          category_id: '',
           location: '',
           quantity: 0
         }]
@@ -5099,6 +5100,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     addItem: function addItem() {
       var item = {
         size_id: '',
+        category_id: '',
         location: '',
         quantity: 0
       };
@@ -5429,11 +5431,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 var render = function render() {
   var _vm = this,
-      _c = _vm._self._c;
-
+    _c = _vm._self._c;
   return _c("div", [_vm._v("\n    test\n")]);
 };
-
 var staticRenderFns = [];
 render._withStripped = true;
 
@@ -5735,6 +5735,38 @@ var render = function render() {
           value: size.id
         }
       }, [_vm._v(_vm._s(size.size))]);
+    })], 2)]), _vm._v(" "), _c("div", {
+      staticClass: "col-sm-4"
+    }, [_c("select", {
+      directives: [{
+        name: "model",
+        rawName: "v-model",
+        value: item.size_id,
+        expression: "item.size_id"
+      }],
+      staticClass: "form-control",
+      on: {
+        change: function change($event) {
+          var $$selectedVal = Array.prototype.filter.call($event.target.options, function (o) {
+            return o.selected;
+          }).map(function (o) {
+            var val = "_value" in o ? o._value : o.value;
+            return val;
+          });
+          _vm.$set(item, "size_id", $event.target.multiple ? $$selectedVal : $$selectedVal[0]);
+        }
+      }
+    }, [_c("option", {
+      attrs: {
+        value: ""
+      }
+    }, [_vm._v("Select a Category")]), _vm._v(" "), _vm._l(_vm.categories, function (category, index) {
+      return _c("option", {
+        key: index,
+        domProps: {
+          value: category.id
+        }
+      }, [_vm._v(_vm._s(_vm.cateogry.name))]);
     })], 2)]), _vm._v(" "), _c("div", {
       staticClass: "col-sm-3"
     }, [_c("input", {
@@ -6743,6 +6775,7 @@ var app = new vue__WEBPACK_IMPORTED_MODULE_2__["default"]({
 /***/ ((__unused_webpack_module, __unused_webpack_exports, __webpack_require__) => {
 
 window._ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
+
 /**
  * We'll load the axios HTTP library which allows us to easily issue requests
  * to our Laravel back-end. This library automatically handles sending the
@@ -6751,13 +6784,17 @@ window._ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
 
 window.axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+
 /**
  * Echo exposes an expressive API for subscribing to channels and listening
  * for events that are broadcast by Laravel. Echo and event broadcasting
  * allows your team to easily build robust real-time web applications.
  */
+
 // import Echo from 'laravel-echo';
+
 // window.Pusher = require('pusher-js');
+
 // window.Echo = new Echo({
 //     broadcaster: 'pusher',
 //     key: process.env.MIX_PUSHER_APP_KEY,

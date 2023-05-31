@@ -5,12 +5,12 @@
     <div class="container-fluid">
       <div class="row mb-2">
         <div class="col-sm-6">
-          <h1 class="m-0">Brands</h1>
+          <h1 class="m-0">Stocks</h1>
         </div><!-- /.col -->
         <div class="col-sm-6">
           <ol class="breadcrumb float-sm-right">
             <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Home</a></li>
-            <li class="breadcrumb-item active">Brand list</li>
+            <li class="breadcrumb-item active">Stocks list</li>
           </ol>
         </div><!-- /.col -->
       </div><!-- /.row -->
@@ -26,34 +26,46 @@
           <div class="card card-primary card-outline">
             <div class="card-body">
 
-              <a href="{{route('brands.create')}}" class="btn btn-sm btn-primary">
-                <i class="fa fa-plus"></i> Add Brand
+              <a href="{{route('stocks.create')}}" class="btn btn-sm btn-primary">
+                <i class="fa fa-plus"></i> Add Product
               </a><br><br>
-              <h4 class="card-title">Brand list</h4>
+              <h4 class="card-title">Product list</h4>
               <table class="table table-bordered datatable">
                 <thead>
                     <tr>
                         <th>#SL</th>
-                        <th>Name</th>
+                        <th class="text-center">Category</th>
+                        <th>Product</th>
+                        <th>Recieved Quantity</th>
+                        <th>Current Quantity</th>
+
                         <th class="text-center">Action</th>
                     </tr>
                 </thead>
                 <tbody>
-                @if($brands)
-                    @foreach($brands as $key => $brand)
+                @if($stocks)
+                    @foreach($stocks as $key => $stock)
                         <tr>
-                            <td>{{ ++$key }}</th>
-                            <td>{{ $brand->name ?? ''}}</th>
+                            <td>{{ ++$key }}</td>
+                            
+                            <td>{{ $stock->category->name ?? ''}}</td>
+                            <td>{{ $stock->product->name ?? ''}}</td>
+                            <td>{{ $stock->recieved_quantity ?? ''}}</td>
+                            <td>{{ $stock->current_quantity ?? ''}}</td>
+
                             <td class="text-center">
-                                <a href="{{ route('brands.edit', $brand->id)}}" class="btn btn-sm btn-info">
+                                <a href="{{ route('stocks.show', $stock->id)}}" class="btn btn-sm btn-primary">
+                                    <i class="fa fa-eye"></i> Show
+                                </a>
+                                <a href="{{ route('stocks.edit', $stock->id)}}" class="btn btn-sm btn-info">
                                     <i class="fa fa-edit"></i> Edit
                                 </a>
 
-                                <a href="javascript:;" class="btn btn-sm btn-danger sa-delete" data-form-id="brand-delete-{{$brand->id}}">
+                                <a href="javascript:;" class="btn btn-sm btn-danger sa-delete" data-form-id="stock-delete-{{$stock->id}}">
                                     <i class="fa fa-trash"></i> Delete
                                 </a>
 
-                                <form id="brand-delete-{{$brand->id}}" action="{{ route('brands.destroy', $brand->id)}}" method="post">
+                                <form id="stock-delete-{{$stock->id}}" action="{{ route('stocks.destroy', $stock->id)}}" method="post">
                                     @csrf
                                     @method('DELETE')
                                 </form>

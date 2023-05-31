@@ -28,7 +28,7 @@
               <h5 class="card-title">Edit Category</h5><br>
 
               <!-- form start -->
-              <form role="form" action="{{ route('categories.update', $category->id) }}" method="post">
+              <form role="form" action="{{ route('categories.update', $category->id) }}" method="post" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
                 <div class="card-body">
